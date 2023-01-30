@@ -1,0 +1,76 @@
+<div class="container-fluid row mt-1">
+  <div class="col-4">
+    <div class="container">
+      <div class="container contenedor-imagen">
+      <img src="../assets/Logo-ElFisgon.png" alt="Logo">
+      </div>
+      <h4 class="text-center" >Crear Clasificados</h4>
+      <form class="form-group">
+        <p>Fecha</p>
+        <input [(ngModel)]="clasi.fecha" name="fecha" type="texto" class="form-control m-b-1">
+        <p>Tipo</p>
+        <select [(ngModel)]="clasi.tipo" name="tipo" id="tipo" class="form-select m-b-1">
+          <option value="compra">Compra</option>
+          <option value="venta">Venta</option>
+          <option value="alquiler">Alquiler</option>
+        </select>
+        <p>Descripción</p>
+        <input [(ngModel)]="clasi.descripcion" name="descripcion" type="text" class="form-control m-b-1">
+        <p>Telefono</p>
+        <input [(ngModel)]="clasi.telefonos" name="telefonos" type="text" class="form-control m-b-1">
+        <p>Nombre de Contacto</p>
+        <input [(ngModel)]="clasi.nombreContacto" name="nombreContacto" type="text" class="form-control m-b-1">
+        <p>Precio</p>
+        <input [(ngModel)]="clasi.precio" name="precio" type="number" class="form-control m-b-1">
+        <div class="container contenedor-ubicacion m-b-1">
+          <h5>Ubicación</h5>
+          <p>Ciudad</p>
+          <input [(ngModel)]="clasi.ciudad" name="ciudad" type="text" class="form-control">
+          <p>Dirección</p>
+          <input [(ngModel)]="clasi.direccion" name="direccion" type="text" class="form-control">
+        </div>
+        <p>Condición</p>
+        <select [(ngModel)]="clasi.condicion" name="condicion" id="condicion" class="form-select m-b-1">
+          <option value="usado">Usado</option>
+          <option value="nuevo">Nuevo</option>
+        </select>
+        <p>Categoria</p>
+        <select [(ngModel)]="clasi.categoria" name="categoria" id="categoria" class="form-select m-b-1">
+          <option value="finca">Finca Raiz</option>
+          <option value="vehiculo">Vehiculo</option>
+          <option value="empleo">Empleo</option>
+          <option value="otros">Otros</option>
+        </select>
+        <button type="submit" class="btn btn-dark" (click)="registrarOEditar()">ENVIAR</button>
+        <br>
+        <button *ngIf="clasi.id !== 0" type="submit" class="btn btn-danger" (click)="borrar()">BORRAR</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-8">
+    <div id="contenedor-de-publicaciones-y-buscador" class="container">
+      <div class="contenedor-buscador row">
+        <input type="text" id="input-buscador" name="txtBuscar" placeholder="Buscar..." (keyup.enter)="buscar()"
+        #txtBuscar>
+        <i id="btn-buscador" class="fa-solid fa-magnifying-glass btn btn-outline-dark"></i>
+      </div>
+      <button class="btn btn-success" (click)="mostrar()">Mostrar</button>
+      <button class="btn btn-warning" (click)="ocultar()">Ocultar </button>
+      <div id="contenedor-clasificados" class="row">
+
+        <div *ngIf="!esBusqueda">
+        <div class="container m-b-1" *ngFor="let clasi of clasificados" >
+          <div class="clasificados" (click)="Editar(clasi)">
+            <span (click)="Editar(clasi)" class="text-center">{{ clasi.tipo | titlecase }}, {{ clasi.categoria }}</span>
+            <p (click)="Editar(clasi)" class="text-center">{{ clasi.ciudad }}, {{ clasi.direccion }}, {{ clasi.fecha }}</p>
+            <p (click)="Editar(clasi)" class="text-center">{{ clasi.precio | currency }} COP</p>
+            <p (click)="Editar(clasi)" class="text-center">{{ clasi.condicion }}</p>
+            <p (click)="Editar(clasi)" class="text-center">{{ clasi.descripcion }}</p>
+            <p (click)="Editar(clasi)" class="text-center">{{ clasi.nombreContacto }}: {{ clasi.telefonos }}</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
